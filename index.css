@@ -53,9 +53,10 @@ img{
 }
 .progress{
     background-color: white;
-    width: 20%;
+    width: 0%;
     height: 100%;
     border-radius: 10px;
+    transition: width 0.3s ease;
 }
 .timers{
     display: flex;

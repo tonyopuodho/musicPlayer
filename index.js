@@ -7,6 +7,7 @@ const playPauseIcon = document.querySelector(".fa-play")
 const playPauseButton = document.querySelector(".play-pause")
 const nextButtonElement = document.querySelector(".fa-forward")
 const backButtonElement = document.querySelector(".fa-backward")
+const progressElement = document.querySelector(".progress")
 
 let musicIndex = 2
 
@@ -20,6 +21,13 @@ nextButtonElement.addEventListener('click',() => {
     loadMusic(musicIndex)
     playMusic()
 
+})
+
+backButtonElement.addEventListener('click', () => {
+    musicIndex -= 1
+    musicIndex < 1 ? musicIndex = allMusic.length : musicIndex = musicIndex
+    loadMusic(musicIndex)
+    playMusic()
 })
 
 function loadMusic(musicIndex){
@@ -40,6 +48,13 @@ function pauseMusic(){
     playPauseIcon.classList.remove("fa-pause")
     musicAudio.pause()
 }
+
+musicAudio.addEventListener('timeupdate',(event) => {
+    const duration = event.target.duration
+    const current = event.target.currentTime
+    const progress = (current / duration) * 100
+    progressElement.style.width = `${progress}%`    
+})
 
 playPauseButton.addEventListener('click',() => {
     const isPlaying = containerElement.classList.contains("pause")
