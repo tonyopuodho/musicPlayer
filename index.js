@@ -5,12 +5,21 @@ const artistName = document.getElementById("artist")
 const musicAudio = document.getElementById("audio")
 const playPauseIcon = document.querySelector(".fa-play")
 const playPauseButton = document.querySelector(".play-pause")
+const nextButtonElement = document.querySelector(".fa-forward")
+const backButtonElement = document.querySelector(".fa-backward")
 
-let musicIndex = 3
+let musicIndex = 2
 
 window.addEventListener('load',() => {
     loadMusic(musicIndex)
+})
+
+nextButtonElement.addEventListener('click',() => {
+    musicIndex += 1
+    musicIndex > allMusic.length ? musicIndex = 1 : musicIndex = musicIndex
+    loadMusic(musicIndex)
     playMusic()
+
 })
 
 function loadMusic(musicIndex){
@@ -32,9 +41,7 @@ function pauseMusic(){
     musicAudio.pause()
 }
 
-
 playPauseButton.addEventListener('click',() => {
     const isPlaying = containerElement.classList.contains("pause")
     isPlaying ? pauseMusic() : playMusic()
-
 })
