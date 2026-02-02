@@ -10,6 +10,7 @@ const backButtonElement = document.querySelector(".fa-backward")
 const progressElement = document.querySelector(".progress")
 const startElement = document.getElementById("start-timer")
 const endElement = document.getElementById("end-timer")
+const progressBarElement = document.querySelector(".progress-bar")
 
 let musicIndex = 2
 
@@ -76,6 +77,13 @@ musicAudio.addEventListener('timeupdate',(event) => {
     }
     
     startElement.innerHTML = `${currntMin}:${currntSec}`
+})
+
+progressBarElement.addEventListener('click',(event) => {
+    const clientWidth = progressBarElement.clientWidth
+    let offsetX = event.offsetX
+    let songDuration = musicAudio.duration
+    musicAudio.currentTime = (offsetX / clientWidth) * songDuration
 })
 
 playPauseButton.addEventListener('click',() => {
